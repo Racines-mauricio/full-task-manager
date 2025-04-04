@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 text: vti,
                 complete: false
                 };
+                
             tasks.push(task);
             console.log(tasks);
             }
@@ -41,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
             task => {
                 console.log(task);
                 const li = document.createElement('li');
+                li.style.backgroundColor = task.complete ? 'lightgreen' : '';
+                
                 li.innerHTML = 
                     '<span> ' + task.text + ' </span>' +
                     '<div>'+
@@ -48,9 +51,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Editar </button>'+
                     '<button class="delete-btn" onclick="deleteTask(' + task.id + ')">'+
                     'Eliminar </button>'+
+                    '<button class="complete-btn" onclick="completeTask(' + task.id + ')">'+
+                    'Completado </button>'+
+
                     '</div>';
+                if (task.complete) {
+                    const ocultarBotones = li.querySelectorAll('button');
+                    ocultarBotones.forEach(button => button.style.display = 'none');
+                }
+                    
                 taskList.appendChild(li);
             }
+            
         );
     };
 
@@ -68,6 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
             editingId = et.id;
         }
     }
+
+
+    window.completeTask = function (id) {
+        tasks = tasks.map(task => {
+            if (task.id === id) {
+                return { ...task, complete: true };
+            }
+            return task;
+        });
+        
+        renderTasks();
+    }
+
 
 
 });
