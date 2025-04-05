@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 text: vti,
                 complete: false
                 };
-                
             tasks.push(task);
             console.log(tasks);
             }
@@ -42,27 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
             task => {
                 console.log(task);
                 const li = document.createElement('li');
-                li.style.backgroundColor = task.complete ? 'lightgreen' : '';
-                
+                li.className = "flex justify-between items-center bg-gray-100 px-4 py-2 rounded"
                 li.innerHTML = 
                     '<span> ' + task.text + ' </span>' +
-                    '<div>'+
-                    '<button class="edit-btn" onclick="editTask(' + task.id + ')">'+
+                    '<div class="space-x-2">'+
+                    '<button class="text-blue-600 hover:underline" onclick="editTask(' + task.id + ')">'+
                     'Editar </button>'+
-                    '<button class="delete-btn" onclick="deleteTask(' + task.id + ')">'+
+                    '<button class="text-red-600 hover:underline" onclick="deleteTask(' + task.id + ')">'+
                     'Eliminar </button>'+
-                    '<button class="complete-btn" onclick="completeTask(' + task.id + ')">'+
-                    'Completado </button>'+
-
                     '</div>';
-                if (task.complete) {
-                    const ocultarBotones = li.querySelectorAll('button');
-                    ocultarBotones.forEach(button => button.style.display = 'none');
-                }
-                    
                 taskList.appendChild(li);
             }
-            
         );
     };
 
@@ -80,19 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
             editingId = et.id;
         }
     }
-
-
-    window.completeTask = function (id) {
-        tasks = tasks.map(task => {
-            if (task.id === id) {
-                return { ...task, complete: true };
-            }
-            return task;
-        });
-        
-        renderTasks();
-    }
-
 
 
 });
