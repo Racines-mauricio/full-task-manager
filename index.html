@@ -19,6 +19,11 @@
             required/>
             <button id="task-form">Agregar</button>
         </div>
+        <form action="server/task/index.php" method="post">
+            <input type="text" name="title" id="title">
+            <input type="email" name="email" id="email" placeholder="pedro@gmail.com">
+            <button type="submit">Enviar</button>
+        </form>
 
         <ul id="task-list">
             
