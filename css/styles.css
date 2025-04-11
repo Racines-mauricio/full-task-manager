@@ -121,3 +121,7 @@ li {
 .my-form button {
     background-color: #0056b3;
 }
+
+.req-field {
+    color: red;
+}

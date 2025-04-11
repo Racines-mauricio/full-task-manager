@@ -12,11 +12,10 @@
     <main>
         <h1>Gestor de tareas</h1>
 
-        <form action="server/task/index.php" method="post" class="my-form">
+        <form action="server/task/create.php" method="post" class="my-form">
 
             <label for="title" class="field">
-                <span class="req-field">*</span>
-                <span>title:</span>
+                <span><span class="req-field">*</span> title:</span>
                 <input type="text" name="title" placeholder="title" id="title" required/>
             </label>
 
@@ -36,14 +35,12 @@
             </label>
 
             <label for="user_id" class="field">
-                <span class="req-field">*</span>
-                <span>user id:</span>
+                <span><span class="req-field">*</span> user id:</span>
                 <input type="number" name="user_id" placeholder="user_id" id="user_id" required/>
             </label>
 
             <label for="category_id" class="field">
-                <span class="req-field">*</span>
-                <span>category id:</span>
+                <span><span class="req-field">*</span> category id:</span>
                 <input type="number" name="category_id" placeholder="category_id" id="category_id" required/>
             </label>
 
