@@ -12,33 +12,41 @@
     <main>
         <h1>Gestor de tareas</h1>
 
-        <form action="server/task/index.php" method="post">
-            <!--
-            title
-            description
-            due_date
-            complete
-            user_id
-            category_id
-            -->
-            <span>title</span>
-            <input type="text" name="title" id="title">
-            <br>
-            <span>description</span>
-            <input type="text" name="description" id="description">
-            <br>
-            <span>due_date</span>
-            <input type="text" name="due_date" id="due_date">
-            <br>
-            <span>complete</span>
-            <input type="text" name="complete" id="complete">
-            <br>
-            <span>user_id</span>
-            <input type="text" name="user_id" id="user_id">
-            <br>
-            <span>category_id</span>
-            <input type="text" name="category_id" id="category_id">
-            <br>
+        <form action="server/task/index.php" method="post" class="my-form">
+
+            <label for="title" class="field">
+                <span class="req-field">*</span>
+                <span>title:</span>
+                <input type="text" name="title" placeholder="title" id="title" required/>
+            </label>
+
+            <label for="description" class="field">
+                <span>description:</span>
+                <input type="text" name="description" placeholder="description" id="description"/>
+            </label>
+
+            <label for="due_date" class="field">
+                <span>release date:</span>
+                <input type="date" name="due_date" placeholder="due_date" id="due_date"/>
+            </label>
+
+            <label for="complete" class="field">
+                <span>is complete?</span>
+                <input !checked type="checkbox" name="complete" placeholder="complete" id="complete"/>
+            </label>
+
+            <label for="user_id" class="field">
+                <span class="req-field">*</span>
+                <span>user id:</span>
+                <input type="number" name="user_id" placeholder="user_id" id="user_id" required/>
+            </label>
+
+            <label for="category_id" class="field">
+                <span class="req-field">*</span>
+                <span>category id:</span>
+                <input type="number" name="category_id" placeholder="category_id" id="category_id" required/>
+            </label>
+
             
             <button type="submit">Enviar</button>
         </form>
