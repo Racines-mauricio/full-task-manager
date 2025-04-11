@@ -11,17 +11,35 @@
 <body>
     <main>
         <h1>Gestor de tareas</h1>
-        <div id="div-form">
-            <h2>Este es el formulario para crear tareas</h2>
-            <input type="text"
-            id="task-input"
-            placeholder="Escribe una tarea"
-            required/>
-            <button id="task-form">Agregar</button>
-        </div>
+
         <form action="server/task/index.php" method="post">
+            <!--
+            title
+            description
+            due_date
+            complete
+            user_id
+            category_id
+            -->
+            <span>title</span>
             <input type="text" name="title" id="title">
-            <input type="email" name="email" id="email" placeholder="pedro@gmail.com">
+            <br>
+            <span>description</span>
+            <input type="text" name="description" id="description">
+            <br>
+            <span>due_date</span>
+            <input type="text" name="due_date" id="due_date">
+            <br>
+            <span>complete</span>
+            <input type="text" name="complete" id="complete">
+            <br>
+            <span>user_id</span>
+            <input type="text" name="user_id" id="user_id">
+            <br>
+            <span>category_id</span>
+            <input type="text" name="category_id" id="category_id">
+            <br>
+            
             <button type="submit">Enviar</button>
         </form>
 
