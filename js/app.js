@@ -3,9 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
+    const categoryInput = document.getElementById('category-input');
+    const categoryList = document.getElementById('category-list');
+
     let tasks = [];
     let isEditing = false;
     let editingId = null;
+
+    let categorys = [];
+    let isEditing2 = false;
+    let editingId2 = null;
     /*
         taskForm.addEventListener('click', (e) => {
             const vti = taskInput.value.trim();
@@ -134,4 +141,142 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     renderTasks();
+
+
+
+//Aqui empiezan las categorias
+
+    //const categoryForm = document.getElementById('task-form');
+    
+    /*
+        taskForm.addEventListener('click', (e) => {
+            const vti = taskInput.value.trim();
+            if (vti !== '') {
+                if (isEditing) {
+                    tasks = tasks.map(task =>
+                        task.id === editingId ? {
+                            ...task, text: vti
+                        } : task);
+                    isEditing = false;
+                    editingId = null;
+                    taskForm.innerText = "Agregar";
+                }
+                else {
+                    const task = {
+                        id: Date.now(),
+                        text: vti,
+                        complete: false
+                    };
+                    tasks.push(task);
+                    console.log(tasks);
+                }
+                renderTasks();
+                taskInput.value = '';
+            }
+        });
+    */
+    function renderCategorys() {
+        console.log("Runing");
+        fetch('server/user/session_info.php')
+            .then(res => res.json())
+            .then(data => {
+                if (data.user_id) {
+                    console.log('Sesión activa para usuario:', data.user_id);
+                    fetch('server/category/index.php?user_id=' + data.user_id)
+                        .then(response => response.json())
+                        .then(ctg => {
+                            console.log(ctg);
+                            ctg.forEach(
+                                category => {
+                                    console.log(category);
+
+                                    const li = document.createElement('li');
+                                    if (category.completed) {
+                                        li.className = 'category-ready';
+                                        li.innerHTML =
+                                            '<span>' + category.name + '</span>';
+                                    }
+                                    else {
+                                        li.innerHTML =
+                                            '<span>' + category.name + '</span>' +
+                                            '<div>' +
+                                            '<button class="complete-btn" onclick="completeCategory(' + category.id + ')">' +
+                                            'Completar </button>' +
+                                            '<button class="edit-btn" onclick="editCategory(' + category.id + ')">' +
+                                            'Editar </button>' +
+                                            '<button class="delete-btn" onclick="deleteCategory(' + category.id + ')">' +
+                                            'Eliminar </button>' +
+                                            '</div>';
+                                    }
+                                    categoryList.appendChild(li);
+                                }
+                            );
+                        });
+                } else {
+                    console.warn(data.error);
+                    window.location.href = 'login.html';
+                }
+            });
+
+
+
+
+
+        categoryList.innerHTML = '';
+        categorys.forEach(
+            category => {
+                console.log(category);
+
+                const li = document.createElement('li');
+                if (category.complete) {
+                    li.className = 'category-ready';
+                    li.innerHTML =
+                        '<span>' + category.text + '</span>';
+                }
+                else {
+                    li.innerHTML =
+                        '<span>' + category.text + '</span>' +
+                        '<div>' +
+                        '<button class="complete-btn" onclick="completeCategory(' + category.id + ')">' +
+                        'Completar </button>' +
+                        '<button class="edit-btn" onclick="editCategory(' + category.id + ')">' +
+                        'Editar </button>' +
+                        '<button class="delete-btn" onclick="deleteCategory(' + category.id + ')">' +
+                        'Eliminar </button>' +
+                        '</div>';
+                }
+                categoryList.appendChild(li);
+            }
+
+        );
+    }
+
+    window.deleteCategory = function (id) {
+        categorys = categorys.filter(category => category.id !== id);
+        renderCategorys();
+    }
+
+    window.editCategory = function (id) {
+        console.log(id);
+        const et = categorys.find(c => c.id === id);
+        if (et) {
+            categoryInput.value = et.text;
+            categoryForm.innerText = "Guardar";
+            isEditing2 = true;
+            editingId2 = et.id;
+        }
+    }
+
+    window.completeCategory = function (id) {
+        categorys = categorys.map(category =>
+            category.id === id ? {
+                ...category, complete: true
+            } : category);
+        renderCategorys();
+    }
+
+    renderCategorys();
+
+
+    
 });

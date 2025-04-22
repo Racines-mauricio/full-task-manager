@@ -10,6 +10,37 @@
 </head>
 <body>
     <main>
+    <!--Aqui empieza el gestor de categorias-->
+
+        <h1>Gestor de categorias</h1>
+
+        <form action="server/category/create.php" method="post" class="my-form">
+
+            <label for="id" class="field">
+                <span><span class="req-field">*</span> category id:</span>
+                <input type="number" name="id" placeholder="id" id="id" required/>
+            </label>
+
+            <label for="name" class="field">
+                <span><span class="req-field">*</span> name:</span>
+                <input type="text" name="name" placeholder="name" id="name" required/>
+            </label>
+
+            <label for="user_id" class="field">
+                <span><span class="req-field">*</span> user id:</span>
+                <input type="number" name="user_id" placeholder="user_id" id="user_id" required/>
+            </label>
+
+            <button type="submit">Enviar</button>
+        </form>
+
+        <ul id="category-list">
+            
+        </ul>
+     
+
+    
+    
         <h1>Gestor de tareas</h1>
 
         <form action="server/task/create.php" method="post" class="my-form">
@@ -51,6 +82,9 @@
         <ul id="task-list">
             
         </ul>
+
+
+        <!--Aqui empieza el gestor de categorias-->
     </main> 
 </body>
 </html>
