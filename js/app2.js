@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let categorys = [];
     let isEditing2 = false;
     let editingId2 = null;
-    
-    /*    taskForm.addEventListener('click', (e) => {
+    /*
+        taskForm.addEventListener('click', (e) => {
             const vti = taskInput.value.trim();
             if (vti !== '') {
                 if (isEditing) {
@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderTasks();
                 taskInput.value = '';
             }
-        });*/
-    
+        });
+    */
     function renderTasks() {
         console.log("Runing");
         fetch('server/user/session_info.php')
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const et = tasks.find(t => t.id === id);
         if (et) {
             taskInput.value = et.text;
-            taskList.innerText = "Guardar";
+            taskForm.innerText = "Guardar";
             isEditing = true;
             editingId = et.id;
         }
@@ -145,6 +145,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 //Aqui empiezan las categorias
+
+    //const categoryForm = document.getElementById('task-form');
+    
+    /*
+        taskForm.addEventListener('click', (e) => {
+            const vti = taskInput.value.trim();
+            if (vti !== '') {
+                if (isEditing) {
+                    tasks = tasks.map(task =>
+                        task.id === editingId ? {
+                            ...task, text: vti
+                        } : task);
+                    isEditing = false;
+                    editingId = null;
+                    taskForm.innerText = "Agregar";
+                }
+                else {
+                    const task = {
+                        id: Date.now(),
+                        text: vti,
+                        complete: false
+                    };
+                    tasks.push(task);
+                    console.log(tasks);
+                }
+                renderTasks();
+                taskInput.value = '';
+            }
+        });
+    */
     function renderCategorys() {
         console.log("Runing");
         fetch('server/user/session_info.php')
@@ -231,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const et = categorys.find(c => c.id === id);
         if (et) {
             categoryInput.value = et.text;
-            categoryList.innerText = "Guardar";
+            categoryForm.innerText = "Guardar";
             isEditing2 = true;
             editingId2 = et.id;
         }
