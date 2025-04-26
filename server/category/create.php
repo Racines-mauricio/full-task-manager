@@ -1,34 +1,33 @@
 <?php
+header('Content-Type: application/json');
 require '../commons/db.php';
 
-var_dump($_SERVER['REQUEST_METHOD']);
-var_dump($_POST);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (
-        trim($_POST['id']) != '' &&
-        trim($_POST['name']) != '' &&
-        trim($_POST['user_id']) != ''
-    ) {
-
+    if (!empty(trim($_POST['name'])) && !empty(trim($_POST['user_id']))) {
         try {
-            $q = "INSERT INTO task.category(id, name, user_id)";
-            $q = $q . " VALUES (:id, :name, :user_id );";
+            $q = "INSERT INTO task.category(name, user_id) VALUES (:name, :user_id)";
             $stmt = $db->prepare($q);
             $stmt->execute([
-                "id" => $_POST["id"],
                 "name" => $_POST["name"],
                 "user_id" => $_POST["user_id"]
             ]);
+            echo json_encode(["status" => "ok"]);
         } catch (PDOException $e) {
-            echo 'Error en la conexión ' . $e->getMessage();
-            exit();
+            echo json_encode([
+                "status" => "error",
+                "error" => "Error al ingresar la categoría " . $e->getMessage()
+            ]);
         }
-
-        header("Location: /full-task-manager/");
-
     } else {
-        echo 'Nooooooooooo pasa';
+        echo json_encode([
+            "status" => "error",
+            "error" => "Faltan datos."
+        ]);
     }
+} else {
+    echo json_encode([
+        "status" => "error",
+        "error" => "Método no permitido."
+    ]);
 }
-
 ?>

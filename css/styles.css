@@ -125,3 +125,9 @@ li {
 .req-field {
     color: red;
 }
+
+.complete {
+    background-color: #d4edda; /* verde suave */
+    color: #155724; /* texto verde oscuro */
+    font-weight: bold;
+}

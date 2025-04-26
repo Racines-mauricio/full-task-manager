@@ -1,37 +1,41 @@
 <?php
+header('Content-Type: application/json'); // Devolvemos JSON siempre
 require '../commons/db.php';
 
-var_dump($_SERVER['REQUEST_METHOD']);
-var_dump($_POST);
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (
-        trim($_POST['title']) != '' &&
-        trim($_POST['user_id']) != '' &&
-        trim($_POST['category_id']) != ''
+        trim($_POST['title']) !== '' &&
+        trim($_POST['user_id']) !== '' &&
+        trim($_POST['category_id']) !== ''
     ) {
-
         try {
-            $q = "INSERT INTO task.task(title, description, due_date, complete, user_id, category_id)";
-            $q = $q . " VALUES (:title, :description, :due_date, :complete, :user_id, :category_id );";
+            // Aquí corregimos el problema del checkbox "complete"
+            $complete = isset($_POST['complete']) ? 1 : 0;
+
+            $q = "INSERT INTO task.task(title, description, due_date, complete, user_id, category_id) ";
+            $q .= "VALUES (:title, :description, :due_date, :complete, :user_id, :category_id)";
             $stmt = $db->prepare($q);
             $stmt->execute([
                 "title" => $_POST["title"],
                 "description" => $_POST["description"],
                 "due_date" => $_POST["due_date"],
-                "complete" => $_POST["complete"],
+                "complete" => $complete,
                 "user_id" => $_POST["user_id"],
                 "category_id" => $_POST["category_id"]
             ]);
+
+            echo json_encode(["status" => "ok"]);
+            exit();
         } catch (PDOException $e) {
-            echo 'Error en la conexión ' . $e->getMessage();
+            echo json_encode(["status" => "error", "error" => $e->getMessage()]);
             exit();
         }
-
-        header("Location: /full-task-manager/");
-
     } else {
-        echo 'Nooooooooooo pasa';
+        echo json_encode(["status" => "error", "error" => "Campos obligatorios incompletos"]);
+        exit();
     }
+} else {
+    echo json_encode(["status" => "error", "error" => "Método no permitido"]);
+    exit();
 }
-
 ?>

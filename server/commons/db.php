@@ -1,9 +1,9 @@
 <?php
  
  $host = 'localhost';
- $port = '5432';
+ $port = '5433';
  $user = 'postgres';
- $pass = 'udenar';
+ $pass = '1234';
  $db_name = 'task_tool';
  
  try {

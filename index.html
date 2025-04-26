@@ -14,21 +14,20 @@
 
         <h1>Gestor de categorias</h1>
 
-        <form action="server/category/create.php" method="post" class="my-form">
+        <form id="category-form" class="my-form">
 
             <label for="id" class="field">
                 <span><span class="req-field">*</span> category id:</span>
-                <input type="number" name="id" placeholder="id" id="id" required/>
+                <input type="hidden" id="category-id" name="id">
             </label>
 
             <label for="name" class="field">
                 <span><span class="req-field">*</span> name:</span>
-                <input type="text" name="name" placeholder="name" id="name" required/>
+                <input type="text" id="category-name" placeholder="Nombre de la categoría" required>
             </label>
 
             <label for="user_id" class="field">
-                <span><span class="req-field">*</span> user id:</span>
-                <input type="number" name="user_id" placeholder="user_id" id="user_id" required/>
+                <input type="number" id="category-user-id">
             </label>
 
             <button type="submit">Enviar</button>
@@ -49,42 +48,39 @@
                 <span><span class="req-field">*</span> title:</span>
                 <input type="text" name="title" placeholder="title" id="title" required/>
             </label>
-
+        
             <label for="description" class="field">
                 <span>description:</span>
                 <input type="text" name="description" placeholder="description" id="description"/>
             </label>
-
+        
             <label for="due_date" class="field">
                 <span>release date:</span>
                 <input type="date" name="due_date" placeholder="due_date" id="due_date"/>
             </label>
-
+        
             <label for="complete" class="field cbx-g">
                 <span>is complete?</span>
-                <input !checked type="checkbox" name="complete" placeholder="complete" id="complete"/>
+                <input type="checkbox" name="complete" id="complete" value="1"/>
             </label>
-
+        
             <label for="user_id" class="field">
                 <span><span class="req-field">*</span> user id:</span>
                 <input type="number" name="user_id" placeholder="user_id" id="user_id" required/>
             </label>
-
+        
             <label for="category_id" class="field">
                 <span><span class="req-field">*</span> category id:</span>
                 <input type="number" name="category_id" placeholder="category_id" id="category_id" required/>
             </label>
-
-            
+        
             <button type="submit">Enviar</button>
         </form>
-
+        
         <ul id="task-list">
-            
+            <!-- Aquí aparecerán las tareas -->
         </ul>
-
-
-        <!--Aqui empieza el gestor de categorias-->
+        
     </main> 
 </body>
 </html>
