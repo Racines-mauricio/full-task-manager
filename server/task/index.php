@@ -1,7 +1,6 @@
 <?php
 require '../commons/db.php';
 
-// Obligatorio para que el navegador entienda que devolvemos JSON
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -16,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             ]);
             $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            echo json_encode($tasks); //  Respuesta válida
+            echo json_encode($tasks);
 
         } catch (PDOException $e) {
             echo json_encode(["error" => "Error en la conexión: " . $e->getMessage()]);
