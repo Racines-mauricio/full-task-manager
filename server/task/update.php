@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (
         isset($_POST['id'], $_POST['title'], $_POST['description'], $_POST['due_date'], $_POST['category_id'], $_POST['user_id'])
         && trim($_POST['title']) !== ''
+        && trim($_POST['id']) !== ''
     ) {
         try {
             $q = "UPDATE task.task 
@@ -28,7 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'complete' => isset($_POST['complete']) ? 1 : 0
             ]);
 
-            echo json_encode(['status' => 'ok']);
+            if ($stmt->rowCount() > 0) {
+                echo json_encode(['status' => 'ok']);
+            } else {
+                echo json_encode(['error' => 'No se encontró la tarea para actualizar']);
+            }
         } catch (PDOException $e) {
             echo json_encode(['error' => $e->getMessage()]);
         }

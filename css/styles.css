@@ -127,7 +127,6 @@ li {
 }
 
 .complete {
-    background-color: #d4edda; /* verde suave */
-    color: #155724; /* texto verde oscuro */
-    font-weight: bold;
+    background-color: #226b33;
+    color: #ffffff;
 }

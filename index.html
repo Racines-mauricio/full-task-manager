@@ -10,8 +10,6 @@
 </head>
 <body>
     <main>
-    <!--Aqui empieza el gestor de categorias-->
-
         <h1>Gestor de categorias</h1>
 
         <form id="category-form" class="my-form">
@@ -36,7 +34,6 @@
         <ul id="category-list">
             
         </ul>
-     
 
     
     
@@ -74,12 +71,11 @@
                 <input type="number" name="category_id" placeholder="category_id" id="category_id" required/>
             </label>
         
+            <input type="hidden" id="task-id"/>
+
             <button type="submit">Enviar</button>
         </form>
-        
-        <ul id="task-list">
-            <!-- Aquí aparecerán las tareas -->
-        </ul>
+        <ul id="task-list"></ul>
         
     </main> 
 </body>

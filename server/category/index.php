@@ -3,13 +3,12 @@ require '../commons/db.php';
 header('Content-Type: application/json');
 
 if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    // Validamos que se haya recibido user_id
     if (!isset($_GET['user_id']) || !is_numeric($_GET['user_id'])) {
         echo json_encode(["status" => "error", "error" => "ID de usuario inválido"]);
         exit;
     }
 
-    $user_id = (int) $_GET['user_id']; // Convertir a entero
+    $user_id = (int) $_GET['user_id'];
 
     try {
         $stmt = $db->prepare("SELECT * FROM task.category WHERE user_id = :user_id");

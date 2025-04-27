@@ -97,11 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.editCategory = function (category) {
-        // Cargar datos de la categoría en los campos del formulario
         document.getElementById('category-name').value = category.name;
         document.getElementById('category-id').value = category.id;
-    
-        // Cambiar el texto del botón a 'Guardar categoría'
         document.querySelector('#category-form button[type="submit"]').textContent = 'Guardar categoría';
     };
     

@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json'); // Devolvemos JSON siempre
+header('Content-Type: application/json');
 require '../commons/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         trim($_POST['category_id']) !== ''
     ) {
         try {
-            // Aquí corregimos el problema del checkbox "complete"
             $complete = isset($_POST['complete']) ? 1 : 0;
 
             $q = "INSERT INTO task.task(title, description, due_date, complete, user_id, category_id) ";
